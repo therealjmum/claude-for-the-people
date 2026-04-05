@@ -409,6 +409,133 @@ nav {
 .progress-fill { height: 100%; background: var(--accent); transition: width 0.4s ease; }
 
 .sub-h3 { font-family: 'Fraunces', serif; font-size: 1.2rem; font-weight: 600; margin: 2rem 0 1.1rem; }
+
+/* ─── MOBILE HAMBURGER BUTTON ─── */
+.nav-hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 44px; height: 44px;
+  border: none; background: transparent;
+  cursor: pointer; border-radius: 10px;
+  transition: background 0.2s; gap: 5px;
+  flex-shrink: 0;
+}
+.nav-hamburger:hover { background: var(--light); }
+.nav-hamburger span {
+  display: block; width: 20px; height: 2px;
+  background: var(--ink); border-radius: 2px;
+  transition: all 0.25s cubic-bezier(0.4,0,0.2,1);
+}
+.nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* ─── MOBILE MENU DRAWER ─── */
+.mobile-menu {
+  position: fixed;
+  top: 60px; left: 0; right: 0;
+  background: rgba(250,248,244,0.98);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--light);
+  z-index: 98;
+  padding: 0.75rem 1rem 1rem;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(-8px);
+  transition: opacity 0.22s ease, transform 0.22s ease;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+}
+.mobile-menu.open {
+  pointer-events: auto;
+  opacity: 1;
+  transform: translateY(0);
+}
+.mobile-nav-item {
+  display: flex; align-items: center; gap: 0.65rem;
+  width: 100%; padding: 0.8rem 1rem;
+  border-radius: 10px; border: none;
+  background: transparent; color: var(--mid);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.95rem; font-weight: 400;
+  cursor: pointer; transition: all 0.15s;
+  text-align: left; min-height: 48px;
+}
+.mobile-nav-item:hover { background: var(--light); color: var(--ink); }
+.mobile-nav-item.active { background: var(--ink); color: var(--cream); font-weight: 500; }
+.mobile-nav-item .nav-emoji { font-size: 1.05rem; }
+.mobile-menu-overlay {
+  display: none;
+  position: fixed; inset: 0;
+  z-index: 97;
+}
+.mobile-menu-overlay.open { display: block; }
+
+/* ─── RESPONSIVE BREAKPOINTS ─── */
+@media (max-width: 768px) {
+  .nav-pills { display: none; }
+  .nav-hamburger { display: flex; }
+  nav { padding: 0 1rem; }
+  .nav-logo { font-size: 0.95rem; }
+
+  .hero { padding: 90px 1.25rem 56px; }
+  .hero h1 { font-size: clamp(1.7rem, 7vw, 2.6rem); }
+  .hero p { font-size: 1rem; }
+  .hero-cta { width: 100%; justify-content: center; padding: 1rem 1.5rem; font-size: 1rem; min-height: 52px; }
+
+  .section { padding: 60px 1.25rem 60px; }
+  .section-header { margin-bottom: 2rem; }
+  .section-header h2 { font-size: clamp(1.55rem, 6vw, 2.2rem); }
+
+  .card-grid { gap: 0.85rem; }
+  .card { padding: 1.25rem; }
+
+  .step { padding: 1.4rem 0; gap: 1rem; }
+  .step-toggle { font-size: 1.4rem; width: 32px; text-align: center; }
+
+  .scenario-tabs { flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; padding-bottom: 4px; scrollbar-width: none; }
+  .scenario-tabs::-webkit-scrollbar { display: none; }
+  .tab-btn { flex-shrink: 0; }
+
+  .builder-form { padding: 1.25rem; }
+  .form-row-grid { grid-template-columns: 1fr; gap: 0.85rem; }
+  .build-btn { padding: 1rem; font-size: 1rem; min-height: 52px; }
+
+  .glossary-item { flex-direction: column; gap: 0.35rem; }
+  .glossary-term { min-width: unset; }
+
+  .nav-footer { flex-direction: column; gap: 0.75rem; align-items: stretch; }
+  .btn-ghost, .btn-primary { width: 100%; justify-content: center; padding: 0.85rem 1.25rem; font-size: 0.9rem; min-height: 48px; }
+
+  .qs-intro { gap: 0.5rem; }
+  .qs-pill { font-size: 0.82rem; padding: 0.45rem 0.85rem; }
+
+  .rules-grid { grid-template-columns: 1fr; }
+
+  .skill-feature-header { flex-wrap: wrap; gap: 0.6rem; }
+
+  .technique-header { padding: 1rem 1.25rem; }
+  .technique-body { padding: 0 1.25rem 1.25rem; }
+  .technique-block.open .technique-body { padding-top: 1rem; }
+
+  .sched-card-header { flex-wrap: wrap; gap: 0.5rem; }
+
+  body { padding-bottom: env(safe-area-inset-bottom, 0); }
+  .progress-bar { bottom: env(safe-area-inset-bottom, 0); }
+}
+
+@media (max-width: 480px) {
+  .hero { padding: 84px 1rem 48px; }
+  .section { padding: 56px 1rem 56px; }
+  nav { padding: 0 0.875rem; }
+  .hero-badge { font-size: 0.72rem; }
+  .pcard-grid { gap: 0.65rem; }
+  .pcard { padding: 1rem; }
+  .tips-grid { grid-template-columns: 1fr; }
+  .output-box { padding: 1.1rem; }
+}
 </style>
 </head>
 <body>
@@ -424,7 +551,24 @@ nav {
     <button class="nav-pill" onclick="show('builder',5)">Prompt Builder</button>
     <button class="nav-pill" onclick="show('whatelse',6)">What Else</button>
   </div>
+  <button class="nav-hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Open menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+
+<!-- Mobile overlay (closes menu on outside tap) -->
+<div class="mobile-menu-overlay" id="menu-overlay" onclick="closeMenu()"></div>
+
+<!-- Mobile drawer menu -->
+<div class="mobile-menu" id="mobile-menu" role="navigation" aria-label="Mobile navigation">
+  <button class="mobile-nav-item active" id="m-home"    onclick="showMobile('home',0)"><span class="nav-emoji">🏠</span> Home</button>
+  <button class="mobile-nav-item"        id="m-basics"  onclick="showMobile('basics',1)"><span class="nav-emoji">⚡</span> Quick Start</button>
+  <button class="mobile-nav-item"        id="m-projects" onclick="showMobile('projects',2)"><span class="nav-emoji">📁</span> Projects</button>
+  <button class="mobile-nav-item"        id="m-skills"  onclick="showMobile('skills',3)"><span class="nav-emoji">🛠</span> Skills</button>
+  <button class="mobile-nav-item"        id="m-examples" onclick="showMobile('examples',4)"><span class="nav-emoji">💼</span> HR Examples</button>
+  <button class="mobile-nav-item"        id="m-builder" onclick="showMobile('builder',5)"><span class="nav-emoji">✍️</span> Prompt Builder</button>
+  <button class="mobile-nav-item"        id="m-whatelse" onclick="showMobile('whatelse',6)"><span class="nav-emoji">✨</span> What Else</button>
+</div>
 
 <div class="progress-bar"><div class="progress-fill" id="progress" style="width:0%"></div></div>
 
@@ -1894,10 +2038,52 @@ nav {
 
 <script>
 const sections = ['home','basics','projects','skills','examples','builder','whatelse'];
+const mobileIds = ['m-home','m-basics','m-projects','m-skills','m-examples','m-builder','m-whatelse'];
+
+/* ── Mobile menu helpers ── */
+function toggleMenu() {
+  const ham = document.getElementById('hamburger');
+  const menu = document.getElementById('mobile-menu');
+  const overlay = document.getElementById('menu-overlay');
+  const isOpen = menu.classList.contains('open');
+  if (isOpen) { closeMenu(); } else {
+    ham.classList.add('open');
+    ham.setAttribute('aria-expanded','true');
+    menu.classList.add('open');
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+}
+
+function closeMenu() {
+  const ham = document.getElementById('hamburger');
+  const menu = document.getElementById('mobile-menu');
+  const overlay = document.getElementById('menu-overlay');
+  ham.classList.remove('open');
+  ham.setAttribute('aria-expanded','false');
+  menu.classList.remove('open');
+  overlay.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function showMobile(id, idx) {
+  show(id, idx);
+  // update mobile active state
+  mobileIds.forEach((mid, i) => {
+    const el = document.getElementById(mid);
+    if (el) el.classList.toggle('active', i === idx);
+  });
+  closeMenu();
+}
 
 function show(id, idx) {
   sections.forEach(s => document.getElementById(s).classList.remove('active'));
   document.querySelectorAll('.nav-pill').forEach((p,i) => p.classList.toggle('active', i === idx));
+  // keep mobile items in sync too
+  mobileIds.forEach((mid, i) => {
+    const el = document.getElementById(mid);
+    if (el) el.classList.toggle('active', i === idx);
+  });
   document.getElementById(id).classList.add('active');
   const pct = (idx / (sections.length - 1)) * 100;
   document.getElementById('progress').style.width = pct + '%';
